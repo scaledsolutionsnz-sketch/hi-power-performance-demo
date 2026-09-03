@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hi-Power Performance | GT-R &amp; Performance Tuning, Silverdale Auckland</title>
+<meta name="description" content="Hi-Power Performance is a specialist performance workshop in Silverdale, Auckland. ECU and dyno tuning, engine builds, custom fabrication, wiring harnesses, race prep and WoF servicing for GT-Rs and JDM cars.">
+<meta property="og:title" content="Hi-Power Performance | GT-R &amp; Performance Tuning, Silverdale Auckland">
+<meta property="og:description" content="Specialist GT-R and JDM performance workshop in Silverdale. ECU tuning, engine builds, fabrication, race prep and WoF servicing.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1607603750909-408e193868c7?auto=format&fit=crop&w=1200&q=70">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e2382a'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='19' font-weight='900' fill='%23181316' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#181316;
+  --ink-2:#221a1e;
+  --ink-3:#2c2127;
+  --bone:#f3efe9;
+  --paper:#faf8f5;
+  --accent:#c9271a;
+  --accent-bright:#f0594a;
+  --accent-dim:#a51f14;
+  --line:rgba(255,255,255,.1);
+  --line-dark:rgba(24,19,22,.12);
+  --txt-on-dark:#efe9e6;
+  --txt-dim-dark:#c4b6ba;
+  --txt-on-light:#241c20;
+  --txt-dim-light:#5d5156;
+  --radius:2px;
+  --display:'Chakra Petch',sans-serif;
+  --body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{image-orientation:from-image;max-width:100%}
+body{font-family:var(--body);background:var(--ink);color:var(--txt-on-dark);font-size:16px;line-height:1.7;overflow-x:hidden}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.15;text-transform:uppercase;letter-spacing:.01em}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* ---------- intro overlay ---------- */
+#intro{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .7s cubic-bezier(.7,0,.2,1),visibility .7s}
+#intro.gone{transform:translateY(-100%);visibility:hidden}
+#intro .mark{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,4.5vw,2.6rem);text-transform:uppercase;letter-spacing:.06em;color:var(--txt-on-dark);opacity:0;animation:introIn .55s ease-out .1s forwards}
+#intro .mark span{color:var(--accent)}
+#intro .bar{position:absolute;left:50%;bottom:38%;transform:translateX(-50%);width:120px;height:3px;background:var(--line);overflow:hidden}
+#intro .bar i{display:block;height:100%;width:100%;background:var(--accent);transform:translateX(-100%);animation:introBar .9s cubic-bezier(.7,0,.2,1) .15s forwards}
+@keyframes introIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes introBar{to{transform:none}}
+
+/* ---------- nav ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(24,19,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.logo .tick{width:10px;height:22px;background:var(--accent);transform:skewX(-14deg)}
+.logo span{color:var(--accent-bright)}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{font-size:.92rem;font-weight:500;color:var(--txt-dim-dark);transition:color .25s}
+.nav-links a:hover{color:#fff}
+.nav-phone{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border:1px solid var(--accent-bright);color:#fff;font-family:var(--display);font-weight:600;font-size:.88rem;letter-spacing:.03em;line-height:1;border-radius:var(--radius);transition:background .25s}
+.nav-phone:hover{background:var(--accent)}
+.nav-phone svg{flex:none}
+.burger{display:none;background:none;border:1px solid var(--line);width:44px;height:44px;border-radius:var(--radius);cursor:pointer;color:var(--txt-on-dark);align-items:center;justify-content:center}
+.mobile-menu{display:none;background:var(--ink-2);border-bottom:1px solid var(--line)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:flex;align-items:center;min-height:48px;padding:4px 24px;font-weight:500;border-top:1px solid var(--line)}
+.mobile-menu a.mm-call{color:var(--accent-bright);font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+@media(max-width:860px){
+  .nav-links{display:none}
+  .burger{display:inline-flex}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100dvh;display:flex;align-items:center;background:var(--ink);overflow:hidden}
+.hero-slides{position:absolute;inset:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+.hero-slide.on{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(100deg,rgba(24,19,22,.92) 0%,rgba(24,19,22,.72) 45%,rgba(24,19,22,.42) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding:120px 0 72px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:.82rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-bright)}
+.hero-eyebrow::before{content:"";width:34px;height:2px;background:var(--accent-bright)}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.3rem);font-weight:700;max-width:15ch;margin:18px 0 20px;color:#fff}
+.hero h1 em{font-style:normal;color:var(--accent-bright)}
+.hero-sub{max-width:46ch;color:var(--txt-dim-dark);font-size:1.06rem;margin-bottom:30px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.05em;text-transform:uppercase;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;transition:transform .2s,background .25s,border-color .25s;line-height:1.2}
+.btn:active{transform:translateY(1px)}
+.btn-solid{background:var(--accent);color:#fff}
+.btn-solid:hover{background:var(--accent-dim)}
+.btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-ghost:hover{border-color:#fff}
+.hero-review{margin-top:40px;max-width:430px;background:rgba(24,19,22,.45);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:18px 20px;border-radius:var(--radius)}
+.hero-review .stars{display:flex;gap:3px;color:var(--accent-bright);margin-bottom:8px}
+.hero-review blockquote{font-size:.95rem;color:var(--txt-on-dark);min-height:3.2em;transition:opacity .5s}
+.hero-review blockquote.fade{opacity:0}
+.hero-review cite{display:block;margin-top:8px;font-style:normal;font-size:.82rem;color:var(--txt-dim-dark)}
+.hero-review .example-tag{font-size:.78rem;color:var(--txt-dim-dark);display:block;margin-top:10px;border-top:1px solid rgba(255,255,255,.12);padding-top:8px}
+
+/* ---------- section base ---------- */
+section{padding:96px 0}
+.sec-head{max-width:640px;margin-bottom:52px}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+.sec-head p{margin-top:14px}
+.light{background:var(--bone);color:var(--txt-on-light)}
+.light .sec-head p{color:var(--txt-dim-light)}
+.lighter{background:var(--paper);color:var(--txt-on-light)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.svc-card{background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
+.svc-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px rgba(36,28,32,.35)}
+.svc-card figure{aspect-ratio:16/9;overflow:hidden;position:relative}
+.svc-card figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,19,22,0) 55%,rgba(24,19,22,.45))}
+.svc-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05);transition:transform .5s ease}
+.svc-card:hover img{transform:scale(1.05)}
+.svc-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px;flex:1}
+.svc-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.svc-label svg{flex:none}
+.svc-body h3{font-size:1.15rem}
+.svc-body p{font-size:.94rem;color:var(--txt-dim-light)}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-photo{position:relative}
+.about-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);filter:saturate(.85) contrast(1.05)}
+.about-photo .corner{position:absolute;left:0;bottom:0;background:var(--accent);color:#fff;font-family:var(--display);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px}
+.about-copy h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:18px}
+.about-copy p{color:var(--txt-dim-light);margin-bottom:14px}
+.checks{list-style:none;margin-top:22px;display:grid;gap:14px}
+.checks li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.checks svg{flex:none;color:var(--accent);margin-top:4px}
+
+/* ---------- crew ---------- */
+.crew{background:var(--ink-2)}
+.crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.crew-card{border:1px solid var(--line);background:var(--ink-3);border-radius:var(--radius);padding:34px 26px;text-align:center;transition:border-color .3s}
+.crew-card:hover{border-color:var(--accent-bright)}
+.avatar{width:88px;height:88px;border-radius:50%;background:var(--ink);border:2px solid var(--accent-bright);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-family:var(--display);font-weight:700;font-size:1.5rem;color:#fff;letter-spacing:.04em}
+.crew-card .role{font-family:var(--display);font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-bright);display:block;margin-bottom:6px}
+.crew-card h3{font-size:1.1rem;margin-bottom:8px}
+.crew-card p{font-size:.9rem;color:var(--txt-dim-dark)}
+.crew-note{margin-top:26px;font-size:.85rem;color:var(--txt-dim-dark)}
+
+/* ---------- reviews ---------- */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.rev-card{background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:12px}
+.rev-card .stars{display:flex;gap:3px;color:var(--accent)}
+.rev-card p{font-size:.95rem;color:var(--txt-dim-light)}
+.rev-card .who{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:8px}
+.rev-card .who .avatar{width:44px;height:44px;margin:0;font-size:.95rem;border-width:2px}
+.rev-card .who strong{display:block;font-size:.92rem;color:var(--txt-on-light)}
+.rev-card .who small{color:var(--txt-dim-light);font-size:.8rem}
+.rev-foot{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.rev-foot .note{font-size:.85rem;color:var(--txt-dim-light);max-width:52ch}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--ink-3)}
+
+/* ---------- review banner ---------- */
+.banner{background:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:64px 0}
+.banner-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.banner h2{font-size:clamp(1.5rem,3vw,2.1rem);max-width:22ch}
+.banner p{color:var(--txt-dim-dark);margin-top:8px;max-width:46ch}
+
+/* ---------- contact ---------- */
+.contact{background:var(--ink-2)}
+.contact-card{display:grid;grid-template-columns:1fr 1fr;background:var(--ink-3);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;max-width:1120px;margin:0 auto}
+.contact-map{min-height:480px}
+.contact-map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.35) contrast(1.05)}
+.contact-info{padding:44px 42px;display:flex;flex-direction:column;gap:14px}
+.contact-info h2{font-size:clamp(1.7rem,3vw,2.2rem);margin-bottom:6px}
+.contact-info>p{color:var(--txt-dim-dark);margin-bottom:10px}
+.contact-info .btn{width:100%}
+.c-rows{margin-top:18px;display:grid;gap:14px}
+.c-row{display:flex;gap:14px;align-items:flex-start;font-size:.95rem}
+.c-row svg{flex:none;color:var(--accent-bright);margin-top:3px}
+.c-row a:hover{color:var(--accent-bright)}
+.c-row small{display:block;color:var(--txt-dim-dark);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;font-family:var(--display)}
+.socials{display:flex;gap:12px;margin-top:20px}
+.socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:var(--radius);display:inline-flex;align-items:center;justify-content:center;color:var(--txt-dim-dark);transition:color .25s,border-color .25s}
+.socials a:hover{color:#fff;border-color:var(--accent-bright)}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;margin-bottom:40px}
+.foot-grid .logo{margin-bottom:14px}
+.foot-grid p{font-size:.9rem;color:var(--txt-dim-dark);max-width:38ch}
+.foot-grid h3{font-size:.82rem;letter-spacing:.16em;margin-bottom:14px;color:#fff}
+.foot-grid ul{list-style:none;display:grid;gap:10px}
+.foot-grid ul a{font-size:.92rem;color:var(--txt-dim-dark);transition:color .25s}
+.foot-grid ul a:hover{color:#fff}
+.foot-base{border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.82rem;color:var(--txt-dim-dark)}
+
+/* ---------- responsive ---------- */
+@media(max-width:960px){
+  .svc-grid,.crew-grid,.rev-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  section{padding:72px 0}
+  .about-grid,.contact-card{grid-template-columns:1fr}
+  .contact-map{min-height:320px;order:2}
+  .contact-info{order:1;padding:34px 24px}
+  .banner-in{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  .svc-grid,.crew-grid,.rev-grid{grid-template-columns:1fr}
+  .hero-inner{padding:110px 0 56px}
+  .hero-ctas .btn{width:100%}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  #intro{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="intro" aria-hidden="true">
+  <div class="mark">Hi-Power <span>Performance</span></div>
+  <div class="bar"><i></i></div>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Hi-Power Performance home"><span class="tick" aria-hidden="true"></span>Hi-Power <span>&nbsp;Performance</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#crew">The Crew</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-phone" href="tel:+64211190360">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      021 119 0360
+    </a>
+    <button class="burger" aria-label="Open menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-menu" aria-label="Mobile">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#crew">The Crew</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a class="mm-call" href="tel:+64211190360">Call 021 119 0360</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide on"><img src="https://images.unsplash.com/photo-1607603750909-408e193868c7?auto=format&fit=crop&w=1800&q=70" alt="Black Toyota Supra parked outside a workshop roller door" fetchpriority="high" width="1800" height="1200"></div>
+    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1800&q=70" alt="Nissan GT-R driving away down an open road" loading="lazy" width="1800" height="1200"></div>
+    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1800&q=70" alt="Close up of a performance engine pulley and belt system" loading="lazy" width="1800" height="1200"></div>
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="hero-eyebrow">Silverdale, Auckland</span>
+    <h1>GT-R and JDM tuning done <em>properly</em></h1>
+    <p class="hero-sub">Specialist workshop for high-performance Japanese cars. ECU tuning, engine builds, fabrication and race prep, all under one roof.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="tel:+64211190360">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call the workshop
+      </a>
+      <a class="btn btn-ghost" href="#contact">Book your car in</a>
+    </div>
+    <div class="hero-review">
+      <div class="stars" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+      </div>
+      <blockquote id="hero-quote">"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock."</blockquote>
+      <cite id="hero-cite">Josh M, Millwater</cite>
+      <span class="example-tag">Example reviews shown while we connect the live Google feed</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services light" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What the workshop does</h2>
+      <p>From a factory ECU retune to a full engine build, every job gets the same care as the shop's own 650kW R34.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=900&q=65" alt="Technician working deep inside an engine bay" loading="lazy" width="900" height="506"></figure>
+        <div class="svc-body">
+          <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Tuning</span>
+          <h3>ECU &amp; Dyno Tuning</h3>
+          <p>Haltech and factory ECU tuning with real road and dyno time. You get the printout, not just a promise.</p>
+        </div>
+      </article>
+      <article class="svc-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=900&q=65" alt="Hands using a spanner on a performance engine" loading="lazy" width="900" height="506"></figure>
+        <div class="svc-body">
+          <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Engine</span>
+          <h3>Engine Builds</h3>
+          <p>RB, SR and JZ builds from refresh to fully forged. Measured, blueprinted and broken in the right way.</p>
+        </div>
+      </article>
+      <article class="svc-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=900&q=65" alt="Braided lines and fittings on a race engine" loading="lazy" width="900" height="506"></figure>
+        <div class="svc-body">
+          <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Electrical</span>
+          <h3>Wiring Harnesses</h3>
+          <p>Custom looms built for standalone ECUs and motorsport use. Tidy, labelled and built to last hard laps.</p>
+        </div>
+      </article>
+      <article class="svc-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=65" alt="Welder working with sparks flying in a fabrication bay" loading="lazy" width="900" height="506"></figure>
+        <div class="svc-body">
+          <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Fabrication</span>
+          <h3>Custom Fabrication</h3>
+          <p>Intercooler piping, exhausts, mounts and one-off brackets, made in-house to fit your car, not "close enough".</p>
+        </div>
+      </article>
+      <article class="svc-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=900&q=65" alt="Mechanic preparing a car with the bonnet up in a workshop" loading="lazy" width="900" height="506"></figure>
+        <div class="svc-body">
+          <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Motorsport</span>
+          <h3>Race Car Preparation</h3>
+          <p>Pre-event checks, setup and spanner support so the car is ready before you load the trailer.</p>
+        </div>
+      </article>
+      <article class="svc-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=65" alt="Mechanic pouring fresh oil into an engine" loading="lazy" width="900" height="506"></figure>
+        <div class="svc-body">
+          <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Upkeep</span>
+          <h3>Servicing, WoF &amp; LVV</h3>
+          <p>Servicing and maintenance that respects a modified car, plus WoF and LVV certification sorted for you.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="lighter" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal">
+      <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=1000&q=65" alt="Wall of spanners and tools inside the workshop" loading="lazy" width="1000" height="750">
+      <span class="corner">Since 2016</span>
+    </div>
+    <div class="about-copy reveal">
+      <h2>Built around the cars we drive ourselves</h2>
+      <p>Ethan Lowe opened Hi-Power Performance in Silverdale at the end of 2016 to work on the cars he grew up around: Skylines, GT-Rs and serious Japanese metal. The shop's own RB28-powered R34 GT-R makes 650kW and has been featured in NZ Performance Car.</p>
+      <p>That car is the standard. If a part, tune or weld would not go on the shop R34, it does not go on your car either.</p>
+      <ul class="checks">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>GT-R and JDM specialists, not a general garage</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Haltech and factory ECU tuning in-house</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>WoF and LVV certification handled for modified cars</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CREW -->
+<section class="crew" id="crew">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>The crew</h2>
+      <p style="color:var(--txt-dim-dark)">A small team that knows these platforms inside out. Your car gets one set of hands, start to finish.</p>
+    </div>
+    <div class="crew-grid">
+      <article class="crew-card reveal">
+        <div class="avatar" aria-hidden="true">EL</div>
+        <span class="role">Owner / Head Tuner</span>
+        <h3>Ethan Lowe</h3>
+        <p>Started Hi-Power in 2016. Builds and tunes the shop's 650kW R34 GT-R, and treats every customer car the same way.</p>
+      </article>
+      <article class="crew-card reveal">
+        <div class="avatar" aria-hidden="true">HP</div>
+        <span class="role">Engine Builder</span>
+        <h3>Workshop Team</h3>
+        <p>Measures twice, assembles once. RB, SR and JZ engines built clean on the bench, not rushed on the floor.</p>
+      </article>
+      <article class="crew-card reveal">
+        <div class="avatar" aria-hidden="true">HP</div>
+        <span class="role">Fabrication &amp; Race Prep</span>
+        <h3>Workshop Team</h3>
+        <p>Handles the welding, piping and pre-event prep that keeps race weekends boring in the best way.</p>
+      </article>
+    </div>
+    <p class="crew-note">Ethan is the face of the shop. Team roles shown as examples until the full crew page goes live.</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="light" id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What owners say</h2>
+      <p>Example reviews written for this demo. The live site will pull Hi-Power's real Google reviews.</p>
+    </div>
+    <div class="rev-grid">
+      <article class="rev-card reveal">
+        <div class="stars" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p>"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock. Worth the wait to get booked in."</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true">JM</div>
+          <div><strong>Josh M</strong><small>R33 GTS-T, Millwater</small></div>
+        </div>
+      </article>
+      <article class="rev-card reveal">
+        <div class="stars" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p>"Ethan rewired my whole engine bay for the Haltech. The loom looks factory and every sensor just works now."</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true">SK</div>
+          <div><strong>Sam K</strong><small>S15 Silvia, Whangaparaoa</small></div>
+        </div>
+      </article>
+      <article class="rev-card reveal">
+        <div class="stars" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p>"Took my R32 in for cert work after another shop made a mess of it. Sorted the LVV, fixed the tune, kept me updated the whole way."</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true">TW</div>
+          <div><strong>Tane W</strong><small>R32 GT-R, Albany</small></div>
+        </div>
+      </article>
+    </div>
+    <div class="rev-foot reveal">
+      <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&query=Hi-Power%20Performance%20Silverdale%20Auckland" target="_blank" rel="noopener">See all our Google reviews</a>
+      <p class="note">These are example reviews prepared for the demo. Real Google reviews will replace them when the site goes live.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEW BANNER -->
+<section class="banner">
+  <div class="wrap banner-in reveal">
+    <div>
+      <h2>Happy with our work? Leave us a review</h2>
+      <p>A quick Google review helps other GT-R and JDM owners find a workshop they can trust.</p>
+    </div>
+    <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&query=Hi-Power%20Performance%20Silverdale%20Auckland" target="_blank" rel="noopener">Leave a review on Google</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <div class="contact-map">
+        <iframe title="Map showing Hi-Power Performance at 14f Flexman Place, Silverdale, Auckland" src="https://www.google.com/maps?q=14f%20Flexman%20Place%2C%20Silverdale%2C%20Auckland%200932%2C%20New%20Zealand&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <div class="contact-info">
+        <h2>Book your car in</h2>
+        <p>Call or email with what you are running and what you want from it. Ethan will give you a straight answer.</p>
+        <a class="btn btn-solid" href="tel:+64211190360">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Hi-Power Performance
+        </a>
+        <a class="btn btn-ghost" data-gmail data-user="ethan" data-domain="hi-power.co.nz" data-su="Booking%20enquiry%20from%20the%20website" href="#contact">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Hi-Power Performance
+        </a>
+        <div class="c-rows">
+          <div class="c-row">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><small>Workshop</small>14f Flexman Place, Silverdale, Auckland 0932</div>
+          </div>
+          <div class="c-row">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div><small>Phone</small><a href="tel:+64211190360">021 119 0360</a></div>
+          </div>
+          <div class="c-row">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div><small>Email</small><a data-gmail data-user="ethan" data-domain="hi-power.co.nz" href="#contact"><span data-email-text data-user="ethan" data-domain="hi-power.co.nz"></span></a></div>
+          </div>
+          <div class="c-row">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div><small>Hours</small>Mon to Fri, 8am to 5pm</div>
+          </div>
+        </div>
+        <div class="socials">
+          <a href="https://www.facebook.com/hipowernz" target="_blank" rel="noopener" aria-label="Hi-Power Performance on Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/hipowerperformance/" target="_blank" rel="noopener" aria-label="Hi-Power Performance on Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/channel/UCg8PTsgTvGAm5bZ-A_XKxgg" target="_blank" rel="noopener" aria-label="Hi-Power Performance on YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo"><span class="tick" aria-hidden="true"></span>Hi-Power <span>&nbsp;Performance</span></div>
+        <p>Specialist GT-R and JDM performance workshop in Silverdale, Auckland. Tuning, engine builds, fabrication and race prep since 2016.</p>
+      </div>
+      <div>
+        <h3>Workshop</h3>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#crew">The Crew</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Legal &amp; Social</h3>
+        <ul>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+        <div class="socials">
+          <a href="https://www.facebook.com/hipowernz" target="_blank" rel="noopener" aria-label="Hi-Power Performance on Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/hipowerperformance/" target="_blank" rel="noopener" aria-label="Hi-Power Performance on Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/channel/UCg8PTsgTvGAm5bZ-A_XKxgg" target="_blank" rel="noopener" aria-label="Hi-Power Performance on YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Hi-Power Performance. All rights reserved.</span>
+      <span>14f Flexman Place, Silverdale, Auckland</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* intro overlay */
+  var intro = document.getElementById('intro');
+  if (reduced) { intro.remove(); }
+  else {
+    window.addEventListener('load', function(){
+      setTimeout(function(){ intro.classList.add('gone'); }, 1050);
+      setTimeout(function(){ intro.remove(); }, 1900);
+    });
+    setTimeout(function(){ if (document.getElementById('intro')) { intro.classList.add('gone'); setTimeout(function(){ intro.remove(); }, 800); } }, 2600);
+  }
+
+  /* mobile menu */
+  var burger = document.querySelector('.burger');
+  var menu = document.querySelector('.mobile-menu');
+  burger.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+  });
+
+  /* hero slide rotation */
+  var slides = document.querySelectorAll('.hero-slide');
+  var si = 0;
+  if (!reduced && slides.length > 1) {
+    setInterval(function(){
+      slides[si].classList.remove('on');
+      si = (si + 1) % slides.length;
+      slides[si].classList.add('on');
+    }, 6000);
+  }
+
+  /* hero review quote rotation (same data as the review cards) */
+  var quotes = [
+    { q: '"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock."', c: 'Josh M, Millwater' },
+    { q: '"Ethan rewired my whole engine bay for the Haltech. The loom looks factory."', c: 'Sam K, Whangaparaoa' },
+    { q: '"Sorted the LVV, fixed the tune, kept me updated the whole way."', c: 'Tane W, Albany' }
+  ];
+  var qEl = document.getElementById('hero-quote');
+  var cEl = document.getElementById('hero-cite');
+  var qi = 0;
+  if (!reduced && qEl) {
+    setInterval(function(){
+      qEl.classList.add('fade');
+      setTimeout(function(){
+        qi = (qi + 1) % quotes.length;
+        qEl.textContent = quotes[qi].q;
+        cEl.textContent = quotes[qi].c;
+        qEl.classList.remove('fade');
+      }, 500);
+    }, 6000);
+  }
+
+  /* scroll reveals */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* gmail compose links built from split parts */
+  document.querySelectorAll('a[data-gmail]').forEach(function(a){
+    var to = a.getAttribute('data-user') + '@' + a.getAttribute('data-domain');
+    a.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) + '&su=' + (a.getAttribute('data-su') || '') + '&body=' + (a.getAttribute('data-body') || '');
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+  document.querySelectorAll('[data-email-text]').forEach(function(s){
+    s.textContent = s.getAttribute('data-user') + '@' + s.getAttribute('data-domain');
+  });
+})();
+</script>
+</body>
+</html>
