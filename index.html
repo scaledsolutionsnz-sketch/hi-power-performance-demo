@@ -243,7 +243,10 @@ section{padding:100px 0}
 /* One person runs this shop, so the section is one card, not a grid with the
    same stock face repeated. Identity on the left, what he does on the right. */
 .owner-card{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:0;border:1px solid var(--line);background:var(--ink-3);border-radius:var(--radius);overflow:hidden}
-.owner-id{padding:38px 30px;text-align:center;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
+.owner-id{position:relative;padding:38px 30px;text-align:center;border-right:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:340px}
+.owner-id>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.owner-id::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,15,18,.35) 0%,rgba(20,15,18,.82) 55%,rgba(20,15,18,.96) 100%)}
+.owner-id>:not(img){position:relative;z-index:2}
 .owner-id .role{font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-bright);display:block;margin-bottom:6px}
 .owner-id h3{font-size:1.35rem}
 .owner-tags{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
@@ -267,7 +270,7 @@ section{padding:100px 0}
 .rating-score{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:2rem;font-weight:700;line-height:1;color:var(--txt-on-light);font-variant-numeric:tabular-nums}
 .rating-score .stars{display:flex;gap:2px;color:var(--accent)}
 .rating-body>span{display:block;margin-top:7px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-family:var(--display);color:var(--txt-dim-light)}
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:start}
 .rev-card{background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:12px}
 .rev-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .src-mark{flex:none}
@@ -664,7 +667,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
     </div>
     <article class="owner-card reveal">
       <div class="owner-id">
-        <div class="avatar" aria-hidden="true">EL</div>
+        <img src="assets/work-07.jpg" alt="RB26 engine bay built at Hi-Power Performance" loading="lazy">
         <span class="role">Owner / Head Tuner</span>
         <h3>Ethan Lowe</h3>
         <ul class="owner-tags">
