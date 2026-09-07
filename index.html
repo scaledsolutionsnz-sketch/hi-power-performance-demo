@@ -191,6 +191,31 @@ section{padding:100px 0}
 .work-item .zoom{position:absolute;right:12px;bottom:12px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:rgba(20,15,18,.75);color:#fff;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;border-radius:var(--radius)}
 .work-item:hover .zoom{opacity:1;transform:none}
 .work-note{margin-top:30px;font-size:.85rem;color:var(--txt-dim-dark);max-width:62ch}
+/* SOCIAL PROOF — the following is the strongest thing this business has and the
+   site never mentioned it. 12.1K on Instagram, 5.7K on Facebook, 522 posts.
+   Numbers written with a "+" so they stay true as the accounts grow. */
+.social{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.social .wrap{padding-top:70px;padding-bottom:70px}
+.social-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.social h2{margin-bottom:14px}
+.social-lead{color:var(--txt-dim-dark);font-size:1rem;max-width:46ch}
+.social-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 0}
+.social-num{background:var(--ink-3);border:1px solid var(--line);border-radius:12px;padding:18px 16px}
+.social-num b{display:block;font-family:var(--display);font-size:1.9rem;line-height:1;color:#fff;letter-spacing:-.01em}
+.social-num span{display:block;margin-top:7px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim-dark)}
+.social-actions{display:flex;flex-direction:column;gap:12px}
+.social-btn{display:flex;align-items:center;gap:14px;padding:17px 20px;border-radius:12px;border:1px solid var(--line);background:var(--ink-3);color:var(--txt-on-dark);text-decoration:none;transition:border-color .2s,transform .2s,background .2s}
+.social-btn:hover{border-color:var(--accent-bright);background:#332830;transform:translateY(-2px)}
+.social-btn svg{flex:none}
+.social-btn .sb-t{display:block;font-family:var(--display);font-weight:600;font-size:1rem}
+.social-btn .sb-s{display:block;font-size:.8rem;color:var(--txt-dim-dark);margin-top:2px}
+.social-btn .sb-go{margin-left:auto;color:var(--txt-dim-dark)}
+@media(max-width:860px){
+  .social-inner{grid-template-columns:1fr;gap:34px}
+  .social .wrap{padding-top:54px;padding-bottom:54px}
+  .social-num b{font-size:1.55rem}
+}
+
 
 /* ---------- lightbox ---------- */
 #lightbox{position:fixed;inset:0;z-index:250;background:rgba(12,9,11,.95);display:none;align-items:center;justify-content:center;padding:64px 20px}
@@ -333,6 +358,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#work">Our Work</a></li>
+      <li><a href="#social">Follow</a></li>
       <li><a href="#crew">The Crew</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -349,6 +375,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
     <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="#work">Our Work</a>
+    <a href="#social">Follow</a>
     <a href="#crew">The Crew</a>
     <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
@@ -523,6 +550,38 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
   </div>
 </section>
 
+<!-- SOCIAL -->
+<section class="social" id="social">
+  <div class="wrap">
+    <div class="social-inner">
+      <div class="reveal">
+        <div class="sec-head" style="margin-bottom:0">
+          <span class="kicker">Follow the builds</span>
+          <h2>Nearly 18,000 people watch this workshop work</h2>
+          <p class="social-lead">Engine builds, fabrication and finished cars go up as they happen. If you want to see the standard before you book, that is the fastest way.</p>
+        </div>
+        <div class="social-nums">
+          <div class="social-num"><b>12K+</b><span>Instagram</span></div>
+          <div class="social-num"><b>5.7K+</b><span>Facebook</span></div>
+          <div class="social-num"><b>500+</b><span>Builds posted</span></div>
+        </div>
+      </div>
+      <div class="social-actions reveal">
+        <a class="social-btn" href="https://www.instagram.com/hipowerperformance/" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+          <span><span class="sb-t">@hipowerperformance</span><span class="sb-s">12.1K followers on Instagram</span></span>
+          <svg class="sb-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.facebook.com/hipowernz/" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <span><span class="sb-t">Hi-Power Performance</span><span class="sb-s">5.7K followers on Facebook</span></span>
+          <svg class="sb-go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CREW -->
 <section class="crew dark-sec" id="crew">
   <div class="wrap">
@@ -693,6 +752,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#work">Our Work</a></li>
+          <li><a href="#social">Follow</a></li>
           <li><a href="#crew">The Crew</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
