@@ -128,7 +128,8 @@ header.stuck .logo img{width:124px}
 .hero-review blockquote{font-size:.95rem;color:var(--txt-on-dark);min-height:3.2em;transition:opacity .5s}
 .hero-review blockquote.fade{opacity:0}
 .hero-review cite{display:block;margin-top:8px;font-style:normal;font-size:.82rem;color:#d9ced1}
-.hero-review .example-tag{font-size:.78rem;color:var(--txt-dim-dark);display:block;margin-top:10px;border-top:1px solid rgba(255,255,255,.12);padding-top:8px}
+.hero-rating{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;border-top:1px solid rgba(255,255,255,.12);padding-top:10px}
+.hero-rating span{display:inline-flex;align-items:center;gap:7px;font-family:var(--display);font-size:.82rem;font-weight:600;letter-spacing:.04em;color:#e7dee1}
 .hero-dots{position:absolute;left:24px;bottom:112px;z-index:3;display:flex;gap:9px}
 .hero-dots button{width:26px;height:3px;border:0;padding:0;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,width .3s}
 .hero-dots button[aria-current="true"]{background:var(--accent-bright);width:44px}
@@ -191,7 +192,7 @@ section{padding:100px 0}
 .work-item .zoom{position:absolute;right:12px;bottom:12px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:rgba(20,15,18,.75);color:#fff;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;border-radius:var(--radius)}
 .work-item:hover .zoom{opacity:1;transform:none}
 .work-note{margin-top:30px;font-size:.85rem;color:var(--txt-dim-dark);max-width:62ch}
-/* SOCIAL PROOF — the following is the strongest thing this business has and the
+/* SOCIAL PROOF. The following is the strongest thing this business has and the
    site never mentioned it. 12.1K on Instagram, 5.7K on Facebook, 522 posts.
    Numbers written with a "+" so they stay true as the accounts grow. */
 .social{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -238,12 +239,41 @@ section{padding:100px 0}
 .crew-card .role{font-family:var(--display);font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-bright);display:block;margin-bottom:6px}
 .crew-card h3{font-size:1.1rem;margin-bottom:8px}
 .crew-card p{font-size:.9rem;color:var(--txt-dim-dark)}
-.crew-note{margin-top:26px;font-size:.85rem;color:var(--txt-dim-dark);max-width:60ch}
+
+/* One person runs this shop, so the section is one card, not a grid with the
+   same stock face repeated. Identity on the left, what he does on the right. */
+.owner-card{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:0;border:1px solid var(--line);background:var(--ink-3);border-radius:var(--radius);overflow:hidden}
+.owner-id{padding:38px 30px;text-align:center;border-right:1px solid var(--line);background:rgba(255,255,255,.02)}
+.owner-id .role{font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-bright);display:block;margin-bottom:6px}
+.owner-id h3{font-size:1.35rem}
+.owner-tags{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+.owner-tags li{font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-dim-dark);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.owner-body{padding:38px 34px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.owner-body>p{color:var(--txt-dim-dark);font-size:1rem;max-width:60ch}
+.owner-quote{border-left:2px solid var(--accent-bright);padding-left:18px}
+.owner-quote p{color:var(--txt-on-dark);font-size:.98rem}
+.owner-quote cite{display:flex;align-items:center;gap:8px;margin-top:10px;font-style:normal;font-family:var(--display);font-size:.82rem;font-weight:600;color:#d9ced1}
+.owner-quote cite span{font-weight:500;color:var(--txt-dim-dark);letter-spacing:.04em}
+.owner-quote cite span::before{content:"· "}
 
 /* ---------- reviews ---------- */
+/* The rating bar carries the proof, the cards carry the voice. Both are real
+   figures, so both link straight out to the platform they came from. */
+.rating-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:34px}
+.rating-card{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);padding:22px 26px;transition:border-color .25s,transform .25s,box-shadow .25s}
+.rating-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 30px rgba(20,15,18,.08)}
+.rating-mark{flex:none}
+.rating-body{min-width:0}
+.rating-score{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:2rem;font-weight:700;line-height:1;color:var(--txt-on-light);font-variant-numeric:tabular-nums}
+.rating-score .stars{display:flex;gap:2px;color:var(--accent)}
+.rating-body>span{display:block;margin-top:7px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-family:var(--display);color:var(--txt-dim-light)}
 .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .rev-card{background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:12px}
+.rev-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.src-mark{flex:none}
 .rev-card .stars{display:flex;gap:3px;color:var(--accent)}
+.btn-line{border-color:var(--line-dark);color:var(--txt-on-light)}
+.btn-line:hover{border-color:var(--ink);background:rgba(20,15,18,.04)}
 .rev-card p{font-size:.95rem;color:var(--txt-dim-light)}
 .rev-card .who{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:8px}
 .rev-card .who .avatar{width:44px;height:44px;margin:0;font-size:.95rem;border-width:2px;background:var(--ink);border-color:var(--accent)}
@@ -253,6 +283,23 @@ section{padding:100px 0}
 .rev-foot .note{font-size:.85rem;color:var(--txt-dim-light);max-width:52ch}
 .btn-dark{background:var(--ink);color:#fff}
 .btn-dark:hover{background:var(--ink-3)}
+
+/* ---------- faq ---------- */
+/* Native details/summary: keyboard and screen reader behaviour for free, and
+   the answers sit in the DOM for Google whether or not they are open. */
+.faq-list{display:flex;flex-direction:column;gap:12px;max-width:860px}
+.faq-item{background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);overflow:hidden;transition:border-color .25s}
+.faq-item[open]{border-color:var(--accent)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;cursor:pointer;list-style:none;font-family:var(--display);font-size:1.02rem;font-weight:600;color:var(--txt-on-light);transition:color .2s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--accent)}
+.faq-item summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.faq-chev{flex:none;color:var(--accent);transition:transform .3s}
+.faq-item[open] .faq-chev{transform:rotate(180deg)}
+.faq-a{padding:0 24px 22px;max-width:70ch}
+.faq-a p{color:var(--txt-dim-light);font-size:.96rem}
+.faq-foot{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.faq-foot p{font-family:var(--display);font-size:1.05rem;font-weight:600;color:var(--txt-on-light)}
 
 /* ---------- review banner ---------- */
 .banner{position:relative;padding:78px 0;overflow:hidden;background:var(--ink)}
@@ -305,6 +352,12 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
   .hero-inner{padding:140px 0 190px}
   .hero-dots{bottom:172px}
 }
+@media(max-width:860px){
+  .owner-card{grid-template-columns:1fr}
+  .owner-id{border-right:0;border-bottom:1px solid var(--line);padding:32px 24px}
+  .owner-body{padding:30px 24px}
+  .rating-bar{grid-template-columns:1fr}
+}
 @media(max-width:760px){
   section{padding:76px 0}
   .about-grid,.contact-card{grid-template-columns:1fr}
@@ -341,6 +394,19 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
 </head>
 <body>
 
+<!-- Platform marks, defined once and reused wherever a real review is credited. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="g-mark" viewBox="0 0 48 48">
+    <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+    <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+    <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+    <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+  </symbol>
+  <symbol id="fb-mark" viewBox="0 0 24 24">
+    <path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.95h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z"/>
+  </symbol>
+</svg>
+
 <div id="intro" aria-hidden="true">
   <div class="mark"><img src="assets/logo-light.png" alt="" width="900" height="356"></div>
   <div class="bar"><i></i></div>
@@ -361,6 +427,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
       <li><a href="#social">Follow</a></li>
       <li><a href="#crew">The Crew</a></li>
       <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a class="nav-phone" href="tel:+64211190360">
@@ -378,6 +445,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
     <a href="#social">Follow</a>
     <a href="#crew">The Crew</a>
     <a href="#reviews">Reviews</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
     <a class="mm-call" href="tel:+64211190360">Call 021 119 0360</a>
   </nav>
@@ -413,9 +481,12 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
       </div>
-      <blockquote id="hero-quote">"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock."</blockquote>
-      <cite id="hero-cite">Josh M, Millwater</cite>
-      <span class="example-tag">Example reviews shown while we connect the live Google feed</span>
+      <blockquote id="hero-quote">"The workmanship is top class and in my opinion the fabrication work is the best in NZ."</blockquote>
+      <cite id="hero-cite">McLovin, Google review</cite>
+      <div class="hero-rating">
+        <span><svg width="15" height="15" aria-hidden="true"><use href="#g-mark"/></svg> 4.7 on Google</span>
+        <span><svg width="15" height="15" aria-hidden="true"><use href="#fb-mark"/></svg> 100% recommend</span>
+      </div>
     </div>
   </div>
   <div class="hero-dots" role="tablist" aria-label="Hero images">
@@ -590,27 +661,28 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
       <h2>Who works on your car</h2>
       <p>A small team that knows these platforms inside out. Your car gets one set of hands, start to finish.</p>
     </div>
-    <div class="crew-grid">
-      <article class="crew-card reveal">
+    <article class="owner-card reveal">
+      <div class="owner-id">
         <div class="avatar" aria-hidden="true">EL</div>
         <span class="role">Owner / Head Tuner</span>
         <h3>Ethan Lowe</h3>
-        <p>Started Hi-Power in 2016. Builds and tunes the shop's 650kW R34 GT-R, and treats every customer car the same way.</p>
-      </article>
-      <article class="crew-card reveal">
-        <div class="avatar" aria-hidden="true">HP</div>
-        <span class="role">Engine Builder</span>
-        <h3>Workshop Team</h3>
-        <p>Measures twice, assembles once. RB, SR and JZ engines built clean on the bench, not rushed on the floor.</p>
-      </article>
-      <article class="crew-card reveal">
-        <div class="avatar" aria-hidden="true">HP</div>
-        <span class="role">Fabrication &amp; Race Prep</span>
-        <h3>Workshop Team</h3>
-        <p>Handles the welding, piping and pre-event prep that keeps race weekends boring in the best way.</p>
-      </article>
-    </div>
-    <p class="crew-note">Ethan is the face of the shop. Team roles shown as examples until the full crew page goes live.</p>
+        <ul class="owner-tags">
+          <li>Since 2016</li>
+          <li>Haltech &amp; Link tuning</li>
+          <li>RB engine builds</li>
+        </ul>
+      </div>
+      <div class="owner-body">
+        <p>Ethan started Hi-Power in 2016 and built the shop around GT-Rs. He built and tunes the 650kW R34 that lives here, and every car through the door gets the same treatment: measure it, do it once, and tell you straight what it actually needs.</p>
+        <blockquote class="owner-quote">
+          <p>"You will not be disappointed by the quality of the work Ethan and the boys will do, would definitely recommend."</p>
+          <cite>
+            <svg class="src-mark" width="15" height="15" aria-hidden="true"><use href="#g-mark"/></svg>
+            Gustavo Viana <span>Google review</span>
+          </cite>
+        </blockquote>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -620,55 +692,139 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
     <div class="sec-head reveal">
       <span class="kicker">Reviews</span>
       <h2>What owners say</h2>
-      <p>Example reviews written for this demo. The live site will pull Hi-Power's real Google reviews.</p>
+      <p>Every review below was left by a real Hi-Power customer on Google or Facebook. Nothing here is written by us.</p>
     </div>
+
+    <div class="rating-bar reveal">
+      <a class="rating-card" href="https://www.google.com/maps/search/?api=1&amp;query=Hi-Power%20Performance%20Silverdale%20Auckland" target="_blank" rel="noopener">
+        <svg class="rating-mark" width="30" height="30" aria-hidden="true"><use href="#g-mark"/></svg>
+        <div class="rating-body">
+          <div class="rating-score">4.7<div class="stars" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div></div>
+          <span>23 Google reviews</span>
+        </div>
+      </a>
+      <a class="rating-card" href="https://www.facebook.com/hipowernz/reviews" target="_blank" rel="noopener">
+        <svg class="rating-mark" width="30" height="30" aria-hidden="true"><use href="#fb-mark"/></svg>
+        <div class="rating-body">
+          <div class="rating-score">100%</div>
+          <span>recommend, 16 Facebook reviews</span>
+        </div>
+      </a>
+    </div>
+
     <div class="rev-grid">
       <article class="rev-card reveal">
-        <div class="stars" aria-hidden="true">
+        <div class="rev-top">
+          <div class="stars" aria-label="Five out of five">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div>
+          <svg class="src-mark" width="16" height="16" aria-hidden="true"><use href="#g-mark"/></svg>
         </div>
-        <p>"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock. Worth the wait to get booked in."</p>
+        <p>"One stop shop for performance modifications and custom fabrication work. The workmanship is top class and in my opinion the fabrication work is the best in NZ."</p>
         <div class="who">
-          <div class="avatar" aria-hidden="true">JM</div>
-          <div><strong>Josh M</strong><small>R33 GTS-T, Millwater</small></div>
+          <div class="avatar" aria-hidden="true">MC</div>
+          <div><strong>McLovin</strong><small>Local Guide on Google</small></div>
         </div>
       </article>
       <article class="rev-card reveal">
-        <div class="stars" aria-hidden="true">
+        <div class="rev-top">
+          <div class="stars" aria-label="Five out of five">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div>
+          <svg class="src-mark" width="16" height="16" aria-hidden="true"><use href="#fb-mark"/></svg>
         </div>
-        <p>"Ethan rewired my whole engine bay for the Haltech. The loom looks factory and every sensor just works now."</p>
+        <p>"Absolutely GREAT customer service from Ethan and the team. Let me bring in my Cefiro at EXTREMELY late notice, and his workmanship was above and beyond. Even made me a custom stainless dump pipe when he didn't need to."</p>
         <div class="who">
-          <div class="avatar" aria-hidden="true">SK</div>
-          <div><strong>Sam K</strong><small>S15 Silvia, Whangaparaoa</small></div>
+          <div class="avatar" aria-hidden="true">JD</div>
+          <div><strong>James Dudley</strong><small>Recommends on Facebook</small></div>
         </div>
       </article>
       <article class="rev-card reveal">
-        <div class="stars" aria-hidden="true">
+        <div class="rev-top">
+          <div class="stars" aria-label="Five out of five">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div>
+          <svg class="src-mark" width="16" height="16" aria-hidden="true"><use href="#g-mark"/></svg>
         </div>
-        <p>"Took my R32 in for cert work after another shop made a mess of it. Sorted the LVV, fixed the tune, kept me updated the whole way."</p>
+        <p>"Ethan found my engine mount needed replacing, something nobody else has ever picked up on. The car is now running better than it ever has, and he only replaced what needed to be replaced."</p>
         <div class="who">
-          <div class="avatar" aria-hidden="true">TW</div>
-          <div><strong>Tane W</strong><small>R32 GT-R, Albany</small></div>
+          <div class="avatar" aria-hidden="true">JG</div>
+          <div><strong>Julie Gielen</strong><small>Google review</small></div>
+        </div>
+      </article>
+      <article class="rev-card reveal">
+        <div class="rev-top">
+          <div class="stars" aria-label="Five out of five">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div>
+          <svg class="src-mark" width="16" height="16" aria-hidden="true"><use href="#g-mark"/></svg>
+        </div>
+        <p>"Came in to get my lowering springs installed, was done professionally. The team there at Hi-Power Performance was friendly. 10/10, will come here again for all my car mods."</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true">JK</div>
+          <div><strong>John Kim</strong><small>Google review</small></div>
+        </div>
+      </article>
+      <article class="rev-card reveal">
+        <div class="rev-top">
+          <div class="stars" aria-label="Five out of five">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div>
+          <svg class="src-mark" width="16" height="16" aria-hidden="true"><use href="#g-mark"/></svg>
+        </div>
+        <p>"These boys are always onto it. Highly recommend taking your GTR here!"</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true">MC</div>
+          <div><strong>Matt Connolly</strong><small>Google review</small></div>
+        </div>
+      </article>
+      <article class="rev-card reveal">
+        <div class="rev-top">
+          <div class="stars" aria-label="Five out of five">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div>
+          <svg class="src-mark" width="16" height="16" aria-hidden="true"><use href="#g-mark"/></svg>
+        </div>
+        <p>"Awesome work guys. These guys know their stuff about making cars go fast."</p>
+        <div class="who">
+          <div class="avatar" aria-hidden="true">GR</div>
+          <div><strong>Greig Russell</strong><small>Local Guide on Google</small></div>
         </div>
       </article>
     </div>
     <div class="rev-foot reveal">
-      <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&query=Hi-Power%20Performance%20Silverdale%20Auckland" target="_blank" rel="noopener">See all our Google reviews</a>
-      <p class="note">These are example reviews prepared for the demo. Real Google reviews will replace them when the site goes live.</p>
+      <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Hi-Power%20Performance%20Silverdale%20Auckland" target="_blank" rel="noopener">Read all our Google reviews</a>
+      <a class="btn btn-line" href="https://www.facebook.com/hipowernz/reviews" target="_blank" rel="noopener">See us on Facebook</a>
     </div>
   </div>
 </section>
@@ -682,6 +838,93 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
       <p>A quick Google review helps other GT-R and JDM owners find a workshop they can trust.</p>
     </div>
     <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&query=Hi-Power%20Performance%20Silverdale%20Auckland" target="_blank" rel="noopener">Leave a review on Google</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="light faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Questions</span>
+      <h2>The things people ask us</h2>
+      <p>The questions that come up on the phone most weeks. If yours is not here, call the workshop and ask Ethan directly.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item reveal" open>
+        <summary>
+          <span>What types of vehicles do you specialise in?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>We are a high-performance workshop built around Japanese platforms, with our reputation made on the Nissan GT-R: R32, R33, R34 and R35. That is not all we do. We tune, fabricate for and build street cars, track cars and full race cars across Auckland, whatever the badge on the front.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>Do I need to do anything to my car before a dyno tune?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>A good tune needs a healthy engine underneath it. Before we put a car on the dyno we check it over for boost leaks, worn plugs, fluid leaks and healthy compression. If you already know something is not right, get it fixed first. It is the difference between a safe tune and an expensive one.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>Which aftermarket ECUs do you tune?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>We tune Haltech and Link ECUs day in, day out, along with plug-in and standalone systems and factory ECU remapping. If you are not sure what is in your car or what you should be running, call us and we will talk it through before you buy anything.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>Is a custom tune safe for a street car I drive every day?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>Yes, and that is the whole point of doing it properly. Every tune we do is calibrated inside the safe thermal and mechanical limits of what is actually in your engine. A car should leave here making more power and still start, idle and drive like something you can use on a Monday morning.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>Do you do fabrication and wiring for race cars?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>We do complete motorsport prep in house: custom turbo kits, exhaust manifolds, intercooler and oil plumbing, and motorsport wiring looms built to survive a track weekend. If you have seen the fabrication work on our Instagram, that is all done here.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>Can you help with LVV certification or WoF on a modified car?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>Yes. New Zealand's rules around modified cars catch a lot of people out. We can prep your car, check where it sits against the requirements and carry out the work needed to get it through LVV certification and a Warrant of Fitness.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>Do you do normal servicing, or only performance work?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>Both. Plenty of cars come in for oil and fluid changes, brakes, clutches and diagnostics. If you trust us with the engine build, it makes sense to have the same people doing the servicing that keeps it alive.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>Where are you, and can I drop my car off early?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>We are at 14f Flexman Place, Silverdale, Auckland 0932, on the North Shore. Our hours are listed further down this page. Early drop-offs and late pick-ups are usually no problem, just sort it with us when you book so someone is expecting you.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>How do I get a quote for an engine build or a full project?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>Every build is different, so we would rather talk than throw a number at you. Email Ethan at ethan@hi-power.co.nz with your car, what you want out of it and any parts you already have, or call 021 119 0360, and we will map out the job and get you a workshop slot.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>
+          <span>How long do you need my car for a tune?</span>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-a"><p>Set aside a full day for a standard diagnostic and custom calibration. That gives us time to get the cold start right, do the steady-state mapping properly and finish with power runs. Fabrication work and engine builds get their own timeline, which we give you up front.</p></div>
+      </details>
+    </div>
+    <div class="faq-foot reveal">
+      <p>Still not sure what your car needs?</p>
+      <a class="btn btn-dark" href="tel:+64211190360">Call the workshop</a>
+    </div>
   </div>
 </section>
 
@@ -755,6 +998,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
           <li><a href="#social">Follow</a></li>
           <li><a href="#crew">The Crew</a></li>
           <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -804,7 +1048,97 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
   "telephone":"+64211190360",
   "address":{"@type":"PostalAddress","streetAddress":"14f Flexman Place","addressLocality":"Silverdale","addressRegion":"Auckland","postalCode":"0932","addressCountry":"NZ"},
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"17:00"}],
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.7","reviewCount":"23","bestRating":"5","worstRating":"1"},
   "sameAs":["https://www.facebook.com/hipowernz","https://www.instagram.com/hipowerperformance/","https://www.youtube.com/channel/UCg8PTsgTvGAm5bZ-A_XKxgg"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What types of vehicles do you specialise in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We are a high-performance workshop built around Japanese platforms, with our reputation made on the Nissan GT-R: R32, R33, R34 and R35. That is not all we do. We tune, fabricate for and build street cars, track cars and full race cars across Auckland, whatever the badge on the front."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to do anything to my car before a dyno tune?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A good tune needs a healthy engine underneath it. Before we put a car on the dyno we check it over for boost leaks, worn plugs, fluid leaks and healthy compression. If you already know something is not right, get it fixed first. It is the difference between a safe tune and an expensive one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which aftermarket ECUs do you tune?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We tune Haltech and Link ECUs day in, day out, along with plug-in and standalone systems and factory ECU remapping. If you are not sure what is in your car or what you should be running, call us and we will talk it through before you buy anything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a custom tune safe for a street car I drive every day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and that is the whole point of doing it properly. Every tune we do is calibrated inside the safe thermal and mechanical limits of what is actually in your engine. A car should leave here making more power and still start, idle and drive like something you can use on a Monday morning."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do fabrication and wiring for race cars?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do complete motorsport prep in house: custom turbo kits, exhaust manifolds, intercooler and oil plumbing, and motorsport wiring looms built to survive a track weekend. If you have seen the fabrication work on our Instagram, that is all done here."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you help with LVV certification or WoF on a modified car?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. New Zealand's rules around modified cars catch a lot of people out. We can prep your car, check where it sits against the requirements and carry out the work needed to get it through LVV certification and a Warrant of Fitness."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do normal servicing, or only performance work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both. Plenty of cars come in for oil and fluid changes, brakes, clutches and diagnostics. If you trust us with the engine build, it makes sense to have the same people doing the servicing that keeps it alive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are you, and can I drop my car off early?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We are at 14f Flexman Place, Silverdale, Auckland 0932, on the North Shore. Our hours are listed further down this page. Early drop-offs and late pick-ups are usually no problem, just sort it with us when you book so someone is expecting you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get a quote for an engine build or a full project?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every build is different, so we would rather talk than throw a number at you. Email Ethan at ethan@hi-power.co.nz with your car, what you want out of it and any parts you already have, or call 021 119 0360, and we will map out the job and get you a workshop slot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long do you need my car for a tune?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Set aside a full day for a standard diagnostic and custom calibration. That gives us time to get the cold start right, do the steady-state mapping properly and finish with power runs. Fabrication work and engine builds get their own timeline, which we give you up front."
+      }
+    }
+  ]
 }
 </script>
 
@@ -879,10 +1213,13 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34p
   startHero();
 
   /* ---- hero review quote rotation ---- */
+  /* Real reviews, quoted from Google and Facebook. Do not replace these with
+     written copy: the point of the card is that a stranger said it. */
   var quotes = [
-    { q: '"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock."', c: 'Josh M, Millwater' },
-    { q: '"Ethan rewired my whole engine bay for the Haltech. The loom looks factory."', c: 'Sam K, Whangaparaoa' },
-    { q: '"Sorted the LVV, fixed the tune, kept me updated the whole way."', c: 'Tane W, Albany' }
+    { q: '"The workmanship is top class and in my opinion the fabrication work is the best in NZ."', c: 'McLovin, Google review' },
+    { q: '"Absolutely GREAT customer service from Ethan and the team. His workmanship was above and beyond."', c: 'James Dudley, Facebook' },
+    { q: '"These boys are always onto it. Highly recommend taking your GTR here!"', c: 'Matt Connolly, Google review' },
+    { q: '"Ethan found my engine mount needed replacing, something nobody else has ever picked up on."', c: 'Julie Gielen, Google review' }
   ];
   var qEl = document.getElementById('hero-quote');
   var cEl = document.getElementById('hero-cite');
