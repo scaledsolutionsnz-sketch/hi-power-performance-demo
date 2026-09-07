@@ -5,13 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hi-Power Performance | GT-R &amp; Performance Tuning, Silverdale Auckland</title>
 <meta name="description" content="Hi-Power Performance is a specialist performance workshop in Silverdale, Auckland. ECU and dyno tuning, engine builds, custom fabrication, wiring harnesses, race prep and WoF servicing for GT-Rs and JDM cars.">
+<meta name="theme-color" content="#181316">
+<link rel="canonical" href="https://hi-power-performance-demo.vercel.app/">
 <meta property="og:title" content="Hi-Power Performance | GT-R &amp; Performance Tuning, Silverdale Auckland">
 <meta property="og:description" content="Specialist GT-R and JDM performance workshop in Silverdale. ECU tuning, engine builds, fabrication, race prep and WoF servicing.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://images.unsplash.com/photo-1607603750909-408e193868c7?auto=format&fit=crop&w=1200&q=70">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e2382a'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='19' font-weight='900' fill='%23181316' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<meta property="og:url" content="https://hi-power-performance-demo.vercel.app/">
+<meta property="og:image" content="https://hi-power-performance-demo.vercel.app/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hi-power-performance-demo.vercel.app/assets/og.jpg">
+<link rel="icon" href="assets/icon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/hero-1.jpg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -37,40 +46,52 @@
 html{scroll-behavior:smooth}
 img{image-orientation:from-image;max-width:100%}
 body{font-family:var(--body);background:var(--ink);color:var(--txt-on-dark);font-size:16px;line-height:1.7;overflow-x:hidden}
+body.locked{overflow:hidden}
 ::selection{background:var(--accent);color:#fff}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px}
 h1,h2,h3,h4{font-family:var(--display);line-height:1.15;text-transform:uppercase;letter-spacing:.01em}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* ---------- intro overlay ---------- */
-#intro{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .7s cubic-bezier(.7,0,.2,1),visibility .7s}
-#intro.gone{transform:translateY(-100%);visibility:hidden}
-#intro .mark{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,4.5vw,2.6rem);text-transform:uppercase;letter-spacing:.06em;color:var(--txt-on-dark);opacity:0;animation:introIn .55s ease-out .1s forwards}
-#intro .mark span{color:var(--accent)}
-#intro .bar{position:absolute;left:50%;bottom:38%;transform:translateX(-50%);width:120px;height:3px;background:var(--line);overflow:hidden}
-#intro .bar i{display:block;height:100%;width:100%;background:var(--accent);transform:translateX(-100%);animation:introBar .9s cubic-bezier(.7,0,.2,1) .15s forwards}
-@keyframes introIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* ---------- loading screen ---------- */
+#intro{position:fixed;inset:0;z-index:300;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transition:transform .8s cubic-bezier(.76,0,.24,1),visibility .8s}
+#intro::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 45%,rgba(201,39,26,.16),transparent 70%);opacity:0;animation:glowIn .9s ease-out .15s forwards}
+#intro.gone{transform:translateY(-101%);visibility:hidden}
+#intro .mark{position:relative;width:min(420px,62vw);opacity:0;transform:scale(.94) translateY(10px);animation:introIn .8s cubic-bezier(.2,.7,.3,1) .1s forwards}
+#intro .mark img{display:block;width:100%;height:auto}
+#intro .bar{position:relative;width:min(220px,44vw);height:3px;background:rgba(255,255,255,.14);overflow:hidden;border-radius:2px}
+#intro .bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));transform:translateX(-100%);animation:introBar 1.15s cubic-bezier(.6,0,.2,1) .2s forwards}
+#intro .load-txt{position:relative;font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--txt-dim-dark);opacity:0;animation:introIn .6s ease-out .45s forwards}
+@keyframes introIn{to{opacity:1;transform:none}}
+@keyframes glowIn{to{opacity:1}}
 @keyframes introBar{to{transform:none}}
 
+/* ---------- scroll progress ---------- */
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));z-index:120}
+
 /* ---------- nav ---------- */
-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(24,19,22,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
-.logo .tick{width:10px;height:22px;background:var(--accent);transform:skewX(-14deg)}
-.logo span{color:var(--accent-bright)}
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(24,19,22,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:background .35s,border-color .35s}
+header.stuck{background:rgba(24,19,22,.93);border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;height:84px;transition:height .35s}
+header.stuck .nav{height:68px}
+.logo{display:flex;align-items:center;flex:none}
+.logo img{width:148px;height:auto;display:block;transition:width .35s}
+header.stuck .logo img{width:124px}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
-.nav-links a{font-size:.92rem;font-weight:500;color:var(--txt-dim-dark);transition:color .25s}
+.nav-links a{position:relative;font-size:.92rem;font-weight:500;color:var(--txt-dim-dark);transition:color .25s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--accent-bright);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s}
 .nav-links a:hover{color:#fff}
-.nav-phone{display:inline-flex;align-items:center;gap:8px;height:40px;padding:8px 16px;border:1px solid var(--accent-bright);color:#fff;font-family:var(--display);font-weight:600;font-size:.88rem;letter-spacing:.03em;line-height:1;border-radius:var(--radius);transition:background .25s}
-.nav-phone:hover{background:var(--accent)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-phone{flex:none;display:inline-flex;align-items:center;gap:8px;height:42px;padding:8px 18px;border:1px solid var(--accent-bright);color:#fff;font-family:var(--display);font-weight:600;font-size:.88rem;letter-spacing:.03em;line-height:1;border-radius:var(--radius);transition:background .25s,border-color .25s}
+.nav-phone:hover{background:var(--accent);border-color:var(--accent)}
 .nav-phone svg{flex:none}
-.burger{display:none;background:none;border:1px solid var(--line);width:44px;height:44px;border-radius:var(--radius);cursor:pointer;color:var(--txt-on-dark);align-items:center;justify-content:center}
+.burger{flex:none;display:none;background:none;border:1px solid var(--line);width:44px;height:44px;border-radius:var(--radius);cursor:pointer;color:var(--txt-on-dark);align-items:center;justify-content:center}
 .mobile-menu{display:none;background:var(--ink-2);border-bottom:1px solid var(--line)}
 .mobile-menu.open{display:block}
 .mobile-menu a{display:flex;align-items:center;min-height:48px;padding:12px 24px;font-weight:500;border-top:1px solid var(--line)}
 .mobile-menu a.mm-call{color:var(--accent-bright);font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-@media(max-width:860px){
+@media(max-width:940px){
   .nav-links{display:none}
   .burger{display:inline-flex}
 }
@@ -78,38 +99,59 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(24,19,22,
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:100dvh;display:flex;align-items:center;background:var(--ink);overflow:hidden}
 .hero-slides{position:absolute;inset:0}
-.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease}
 .hero-slide.on{opacity:1}
-.hero-slide img{width:100%;height:100%;object-fit:cover}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(100deg,rgba(24,19,22,.92) 0%,rgba(24,19,22,.72) 45%,rgba(24,19,22,.42) 100%)}
-.hero-inner{position:relative;z-index:2;width:100%;padding:120px 0 72px}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:.82rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-bright)}
+.hero-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.06)}
+.hero-slide.on img{animation:kenburns 9s ease-out forwards}
+@keyframes kenburns{from{transform:scale(1.06)}to{transform:scale(1.15)}}
+.hero-shade{position:absolute;inset:0;background:
+  linear-gradient(100deg,rgba(20,15,18,.95) 0%,rgba(20,15,18,.8) 42%,rgba(20,15,18,.42) 100%),
+  linear-gradient(180deg,rgba(20,15,18,.7) 0%,transparent 26%,transparent 62%,rgba(20,15,18,.88) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding:150px 0 132px}
+.hero-logo{width:min(470px,74vw);margin-bottom:26px;opacity:0;transform:translateY(16px);animation:riseIn .9s cubic-bezier(.2,.7,.3,1) .1s forwards}
+.hero-logo img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:.8rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-bright);opacity:0;animation:riseIn .8s ease-out .25s forwards}
 .hero-eyebrow::before{content:"";width:34px;height:2px;background:var(--accent-bright)}
-.hero h1{font-size:clamp(2.5rem,5.6vw,4.3rem);font-weight:700;max-width:15ch;margin:18px 0 20px;color:#fff}
+.hero h1{font-size:clamp(1.85rem,3.7vw,2.85rem);font-weight:700;max-width:19ch;margin:16px 0 18px;color:#fff;opacity:0;animation:riseIn .8s ease-out .35s forwards}
 .hero h1 em{font-style:normal;color:var(--accent-bright)}
-.hero-sub{max-width:46ch;color:var(--txt-dim-dark);font-size:1.06rem;margin-bottom:30px}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero-sub{max-width:48ch;color:#d8cccf;font-size:1.06rem;margin-bottom:30px;opacity:0;animation:riseIn .8s ease-out .45s forwards}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;opacity:0;animation:riseIn .8s ease-out .55s forwards}
+@keyframes riseIn{to{opacity:1;transform:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 28px;font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.05em;text-transform:uppercase;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;transition:transform .2s,background .25s,border-color .25s;line-height:1.2}
 .btn:active{transform:translateY(1px)}
 .btn-solid{background:var(--accent);color:#fff}
 .btn-solid:hover{background:var(--accent-dim)}
-.btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
-.btn-ghost:hover{border-color:#fff}
-.hero-review{margin-top:40px;max-width:430px;background:rgba(24,19,22,.74);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:18px 20px;border-radius:var(--radius)}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(24,19,22,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.btn-ghost:hover{border-color:#fff;background:rgba(24,19,22,.6)}
+.hero-review{margin-top:38px;max-width:430px;background:rgba(20,15,18,.72);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:18px 20px;border-radius:var(--radius);opacity:0;animation:riseIn .8s ease-out .65s forwards}
 .hero-review .stars{display:flex;gap:3px;color:var(--accent-bright);margin-bottom:8px}
 .hero-review blockquote{font-size:.95rem;color:var(--txt-on-dark);min-height:3.2em;transition:opacity .5s}
 .hero-review blockquote.fade{opacity:0}
 .hero-review cite{display:block;margin-top:8px;font-style:normal;font-size:.82rem;color:#d9ced1}
 .hero-review .example-tag{font-size:.78rem;color:var(--txt-dim-dark);display:block;margin-top:10px;border-top:1px solid rgba(255,255,255,.12);padding-top:8px}
+.hero-dots{position:absolute;left:24px;bottom:112px;z-index:3;display:flex;gap:9px}
+.hero-dots button{width:26px;height:3px;border:0;padding:0;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,width .3s}
+.hero-dots button[aria-current="true"]{background:var(--accent-bright);width:44px}
+.hero-strip{position:absolute;left:0;right:0;bottom:0;z-index:3;border-top:1px solid rgba(255,255,255,.14);background:rgba(20,15,18,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.hero-strip ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr)}
+.hero-strip li{padding:18px 24px;border-left:1px solid rgba(255,255,255,.1)}
+.hero-strip li:first-child{border-left:0}
+.hero-strip b{display:block;font-family:var(--display);font-size:1.24rem;font-weight:700;color:#fff;line-height:1.2}
+.hero-strip span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-dim-dark);font-family:var(--display)}
 
 /* ---------- section base ---------- */
-section{padding:96px 0}
+section{padding:100px 0}
 .sec-head{max-width:640px;margin-bottom:52px}
+.sec-head .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.sec-head .kicker::before{content:"";width:28px;height:2px;background:var(--accent)}
+.dark-sec .sec-head .kicker{color:var(--accent-bright)}
+.dark-sec .sec-head .kicker::before{background:var(--accent-bright)}
 .sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
 .sec-head p{margin-top:14px}
 .light{background:var(--bone);color:var(--txt-on-light)}
 .light .sec-head p{color:var(--txt-dim-light)}
 .lighter{background:var(--paper);color:var(--txt-on-light)}
+.dark-sec .sec-head p{color:var(--txt-dim-dark)}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -117,9 +159,9 @@ section{padding:96px 0}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .svc-card{background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
 .svc-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px rgba(36,28,32,.35)}
-.svc-card figure{aspect-ratio:16/9;overflow:hidden;position:relative}
-.svc-card figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,19,22,0) 55%,rgba(24,19,22,.45))}
-.svc-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05);transition:transform .5s ease}
+.svc-card figure{aspect-ratio:4/3;overflow:hidden;position:relative}
+.svc-card figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,19,22,0) 55%,rgba(24,19,22,.5))}
+.svc-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .svc-card:hover img{transform:scale(1.05)}
 .svc-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px;flex:1}
 .svc-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
@@ -130,7 +172,7 @@ section{padding:96px 0}
 /* ---------- about ---------- */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .about-photo{position:relative}
-.about-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);filter:saturate(.85) contrast(1.05)}
+.about-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius)}
 .about-photo .corner{position:absolute;left:0;bottom:0;background:var(--accent);color:#fff;font-family:var(--display);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px}
 .about-copy h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:18px}
 .about-copy p{color:var(--txt-dim-light);margin-bottom:14px}
@@ -138,11 +180,35 @@ section{padding:96px 0}
 .checks li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
 .checks svg{flex:none;color:var(--accent);margin-top:4px}
 
+/* ---------- work gallery ---------- */
+.work{background:var(--ink-2)}
+.work-grid{columns:3;column-gap:18px}
+.work-item{break-inside:avoid;margin:0 0 18px;position:relative;display:block;width:100%;padding:0;border:0;background:var(--ink-3);cursor:zoom-in;overflow:hidden;border-radius:var(--radius);line-height:0}
+.work-item img{width:100%;height:auto;display:block;transition:transform .55s ease,opacity .4s ease;opacity:.94}
+.work-item:hover img{transform:scale(1.05);opacity:1}
+.work-item::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.08);transition:border-color .35s;pointer-events:none}
+.work-item:hover::after{border-color:var(--accent-bright)}
+.work-item .zoom{position:absolute;right:12px;bottom:12px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:rgba(20,15,18,.75);color:#fff;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;border-radius:var(--radius)}
+.work-item:hover .zoom{opacity:1;transform:none}
+.work-note{margin-top:30px;font-size:.85rem;color:var(--txt-dim-dark);max-width:62ch}
+
+/* ---------- lightbox ---------- */
+#lightbox{position:fixed;inset:0;z-index:250;background:rgba(12,9,11,.95);display:none;align-items:center;justify-content:center;padding:64px 20px}
+#lightbox.open{display:flex}
+#lightbox img{max-width:min(1100px,94vw);max-height:80vh;width:auto;height:auto;object-fit:contain;border-radius:var(--radius)}
+#lightbox .lb-cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:.88rem;color:var(--txt-dim-dark);padding:0 24px}
+#lightbox .lb-cap b{display:block;font-family:var(--display);font-size:.74rem;letter-spacing:.2em;color:var(--accent-bright);margin-bottom:4px;font-weight:600}
+#lightbox button{position:absolute;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s}
+#lightbox button:hover{background:var(--accent);border-color:var(--accent)}
+#lightbox .lb-close{top:20px;right:20px}
+#lightbox .lb-prev{left:20px;top:50%;transform:translateY(-50%)}
+#lightbox .lb-next{right:20px;top:50%;transform:translateY(-50%)}
+
 /* ---------- crew ---------- */
-.crew{background:var(--ink-2)}
+.crew{background:var(--ink)}
 .crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.crew-card{border:1px solid var(--line);background:var(--ink-3);border-radius:var(--radius);padding:34px 26px;text-align:center;transition:border-color .3s}
-.crew-card:hover{border-color:var(--accent-bright)}
+.crew-card{border:1px solid var(--line);background:var(--ink-3);border-radius:var(--radius);padding:34px 26px;text-align:center;transition:border-color .3s,transform .3s}
+.crew-card:hover{border-color:var(--accent-bright);transform:translateY(-4px)}
 .avatar{width:88px;height:88px;border-radius:50%;background:var(--ink);border:2px solid var(--accent-bright);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-family:var(--display);font-weight:700;font-size:1.5rem;color:#fff;letter-spacing:.04em}
 .crew-card .role{font-family:var(--display);font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-bright);display:block;margin-bottom:6px}
 .crew-card h3{font-size:1.1rem;margin-bottom:8px}
@@ -155,7 +221,7 @@ section{padding:96px 0}
 .rev-card .stars{display:flex;gap:3px;color:var(--accent)}
 .rev-card p{font-size:.95rem;color:var(--txt-dim-light)}
 .rev-card .who{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:8px}
-.rev-card .who .avatar{width:44px;height:44px;margin:0;font-size:.95rem;border-width:2px}
+.rev-card .who .avatar{width:44px;height:44px;margin:0;font-size:.95rem;border-width:2px;background:var(--ink);border-color:var(--accent)}
 .rev-card .who strong{display:block;font-size:.92rem;color:var(--txt-on-light)}
 .rev-card .who small{color:var(--txt-dim-light);font-size:.8rem}
 .rev-foot{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
@@ -164,15 +230,18 @@ section{padding:96px 0}
 .btn-dark:hover{background:var(--ink-3)}
 
 /* ---------- review banner ---------- */
-.banner{background:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:64px 0}
-.banner-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
-.banner h2{font-size:clamp(1.5rem,3vw,2.1rem);max-width:22ch}
+.banner{position:relative;padding:78px 0;overflow:hidden;background:var(--ink)}
+.banner-bg{position:absolute;inset:0}
+.banner-bg img{width:100%;height:100%;object-fit:cover;opacity:.28}
+.banner-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,15,18,.94),rgba(20,15,18,.6))}
+.banner-in{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.banner h2{font-size:clamp(1.5rem,3vw,2.1rem);max-width:22ch;color:#fff}
 .banner p{color:var(--txt-dim-dark);margin-top:8px;max-width:46ch}
 
 /* ---------- contact ---------- */
 .contact{background:var(--ink-2)}
 .contact-card{display:grid;grid-template-columns:1fr 1fr;background:var(--ink-3);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;max-width:1120px;margin:0 auto}
-.contact-map{min-height:480px}
+.contact-map{min-height:520px}
 .contact-map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.35) contrast(1.05)}
 .contact-info{padding:44px 42px;display:flex;flex-direction:column;gap:14px}
 .contact-info h2{font-size:clamp(1.7rem,3vw,2.2rem);margin-bottom:6px}
@@ -184,13 +253,14 @@ section{padding:96px 0}
 .c-row a:hover{color:var(--accent-bright)}
 .c-row small{display:block;color:var(--txt-dim-dark);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;font-family:var(--display)}
 .socials{display:flex;gap:12px;margin-top:20px}
-.socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:var(--radius);display:inline-flex;align-items:center;justify-content:center;color:var(--txt-dim-dark);transition:color .25s,border-color .25s}
-.socials a:hover{color:#fff;border-color:var(--accent-bright)}
+.socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:var(--radius);display:inline-flex;align-items:center;justify-content:center;color:var(--txt-dim-dark);transition:color .25s,border-color .25s,background .25s}
+.socials a:hover{color:#fff;border-color:var(--accent-bright);background:rgba(240,89,74,.12)}
 
 /* ---------- footer ---------- */
-footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34px}
+footer{background:var(--ink);border-top:1px solid var(--line);padding:60px 0 34px}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;margin-bottom:40px}
-.foot-grid .logo{margin-bottom:14px}
+.foot-logo{width:190px;margin-bottom:18px;display:block}
+.foot-logo img{width:100%;height:auto;display:block}
 .foot-grid p{font-size:.9rem;color:var(--txt-dim-dark);max-width:38ch}
 .foot-grid h3{font-size:.82rem;letter-spacing:.16em;margin-bottom:14px;color:#fff}
 .foot-grid ul{list-style:none;display:grid;gap:10px}
@@ -199,26 +269,47 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
 .foot-base{border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.82rem;color:var(--txt-dim-dark)}
 
 /* ---------- responsive ---------- */
+@media(max-width:1040px){
+  .work-grid{columns:2}
+}
 @media(max-width:960px){
   .svc-grid,.crew-grid,.rev-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-strip ul{grid-template-columns:repeat(2,1fr)}
+  .hero-strip li:nth-child(3){border-left:0}
+  .hero-strip li:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
+  .hero-inner{padding:140px 0 190px}
+  .hero-dots{bottom:172px}
 }
 @media(max-width:760px){
-  section{padding:72px 0}
+  section{padding:76px 0}
   .about-grid,.contact-card{grid-template-columns:1fr}
   .contact-map{min-height:320px;order:2}
   .contact-info{order:1;padding:34px 24px}
   .banner-in{flex-direction:column;align-items:flex-start}
+  #lightbox{padding:76px 12px}
+  #lightbox .lb-prev{left:8px}
+  #lightbox .lb-next{right:8px}
+}
+@media(max-width:520px){
+  .nav-phone .np-txt{display:none}
+  .nav-phone{padding:8px;width:44px;justify-content:center}
 }
 @media(max-width:640px){
   .svc-grid,.crew-grid,.rev-grid{grid-template-columns:1fr}
-  .hero-inner{padding:110px 0 56px}
+  .work-grid{columns:1}
   .hero-ctas .btn{width:100%}
   .foot-grid{grid-template-columns:1fr;gap:32px}
+  .logo img{width:118px}
+  header.stuck .logo img{width:104px}
+  .nav{height:74px}
+  .hero-strip b{font-size:1.08rem}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .reveal{opacity:1;transform:none}
+  .hero-logo,.hero-eyebrow,.hero h1,.hero-sub,.hero-ctas,.hero-review{opacity:1;transform:none}
+  .hero-slide img{transform:none}
   #intro{display:none}
 }
 </style>
@@ -226,23 +317,29 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
 <body>
 
 <div id="intro" aria-hidden="true">
-  <div class="mark">Hi-Power <span>Performance</span></div>
+  <div class="mark"><img src="assets/logo-light.png" alt="" width="900" height="356"></div>
   <div class="bar"><i></i></div>
+  <div class="load-txt">Silverdale, Auckland</div>
 </div>
+
+<div id="progress" aria-hidden="true"></div>
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="#top" aria-label="Hi-Power Performance home"><span class="tick" aria-hidden="true"></span>Hi-Power <span>&nbsp;Performance</span></a>
+    <a class="logo" href="#top" aria-label="Hi-Power Performance home">
+      <img src="assets/logo-light.png" alt="Hi-Power Performance" width="900" height="356">
+    </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#work">Our Work</a></li>
       <li><a href="#crew">The Crew</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a class="nav-phone" href="tel:+64211190360">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      021 119 0360
+      <span class="np-txt">021 119 0360</span>
     </a>
     <button class="burger" aria-label="Open menu" aria-expanded="false">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -251,6 +348,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
   <nav class="mobile-menu" aria-label="Mobile">
     <a href="#services">Services</a>
     <a href="#about">About</a>
+    <a href="#work">Our Work</a>
     <a href="#crew">The Crew</a>
     <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
@@ -263,12 +361,13 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-slides" aria-hidden="true">
-    <div class="hero-slide on"><img src="https://images.unsplash.com/photo-1607603750909-408e193868c7?auto=format&fit=crop&w=1800&q=70" alt="Black Toyota Supra parked outside a workshop roller door" fetchpriority="high" width="1800" height="1200"></div>
-    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1800&q=70" alt="Nissan GT-R driving away down an open road" loading="lazy" width="1800" height="1200"></div>
-    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1800&q=70" alt="Close up of a performance engine pulley and belt system" loading="lazy" width="1800" height="1200"></div>
+    <div class="hero-slide on"><img src="assets/hero-1.jpg" alt="" fetchpriority="high" width="1920" height="1080"></div>
+    <div class="hero-slide"><img src="assets/hero-2.jpg" alt="" loading="lazy" width="1920" height="1080"></div>
+    <div class="hero-slide"><img src="assets/hero-3.jpg" alt="" loading="lazy" width="1920" height="1080"></div>
   </div>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap hero-inner">
+    <div class="hero-logo"><img src="assets/logo-light.png" alt="Hi-Power Performance" width="900" height="356"></div>
     <span class="hero-eyebrow">Silverdale, Auckland</span>
     <h1>GT-R and JDM tuning done <em>properly</em></h1>
     <p class="hero-sub">Specialist workshop for high-performance Japanese cars. ECU tuning, engine builds, fabrication and race prep, all under one roof.</p>
@@ -281,15 +380,30 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
     </div>
     <div class="hero-review">
       <div class="stars" aria-hidden="true">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
       </div>
       <blockquote id="hero-quote">"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock."</blockquote>
       <cite id="hero-cite">Josh M, Millwater</cite>
       <span class="example-tag">Example reviews shown while we connect the live Google feed</span>
+    </div>
+  </div>
+  <div class="hero-dots" role="tablist" aria-label="Hero images">
+    <button type="button" role="tab" aria-label="Image 1" aria-current="true"></button>
+    <button type="button" role="tab" aria-label="Image 2" aria-current="false"></button>
+    <button type="button" role="tab" aria-label="Image 3" aria-current="false"></button>
+  </div>
+  <div class="hero-strip">
+    <div class="wrap" style="padding:0">
+      <ul>
+        <li><b>Since 2016</b><span>Silverdale workshop</span></li>
+        <li><b>650kW</b><span>Shop R34 GT-R</span></li>
+        <li><b>Haltech</b><span>ECU &amp; dyno tuning</span></li>
+        <li><b>WoF &amp; LVV</b><span>Cert work sorted</span></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -298,12 +412,13 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
 <section class="services light" id="services">
   <div class="wrap">
     <div class="sec-head reveal">
+      <span class="kicker">Services</span>
       <h2>What the workshop does</h2>
       <p>From a factory ECU retune to a full engine build, every job gets the same care as the shop's own 650kW R34.</p>
     </div>
     <div class="svc-grid">
       <article class="svc-card reveal">
-        <figure><img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=900&q=65" alt="Technician working deep inside an engine bay" loading="lazy" width="900" height="506"></figure>
+        <figure><img src="assets/svc-tuning.jpg" alt="Haltech digital dash mounted in a GT-R steering wheel showing live engine data" loading="lazy" width="1000" height="750"></figure>
         <div class="svc-body">
           <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Tuning</span>
           <h3>ECU &amp; Dyno Tuning</h3>
@@ -311,7 +426,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
         </div>
       </article>
       <article class="svc-card reveal">
-        <figure><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=900&q=65" alt="Hands using a spanner on a performance engine" loading="lazy" width="900" height="506"></figure>
+        <figure><img src="assets/svc-engine.jpg" alt="Freshly machined alloy cylinder heads sitting on a workshop tool chest" loading="lazy" width="1000" height="750"></figure>
         <div class="svc-body">
           <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Engine</span>
           <h3>Engine Builds</h3>
@@ -319,7 +434,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
         </div>
       </article>
       <article class="svc-card reveal">
-        <figure><img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=900&q=65" alt="Braided lines and fittings on a race engine" loading="lazy" width="900" height="506"></figure>
+        <figure><img src="assets/svc-wiring.jpg" alt="Engine bay with red anodised fittings, braided lines and a tidy custom loom" loading="lazy" width="1000" height="750"></figure>
         <div class="svc-body">
           <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Electrical</span>
           <h3>Wiring Harnesses</h3>
@@ -327,7 +442,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
         </div>
       </article>
       <article class="svc-card reveal">
-        <figure><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=65" alt="Welder working with sparks flying in a fabrication bay" loading="lazy" width="900" height="506"></figure>
+        <figure><img src="assets/svc-fab.jpg" alt="Twin turbo exhaust manifolds and custom pipework fitted under the rear of a supercar" loading="lazy" width="1000" height="750"></figure>
         <div class="svc-body">
           <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Fabrication</span>
           <h3>Custom Fabrication</h3>
@@ -335,7 +450,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
         </div>
       </article>
       <article class="svc-card reveal">
-        <figure><img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=900&q=65" alt="Mechanic preparing a car with the bonnet up in a workshop" loading="lazy" width="900" height="506"></figure>
+        <figure><img src="assets/svc-race.jpg" alt="Supercar stripped down on stands outside the workshop during a build" loading="lazy" width="1000" height="750"></figure>
         <div class="svc-body">
           <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Motorsport</span>
           <h3>Race Car Preparation</h3>
@@ -343,7 +458,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
         </div>
       </article>
       <article class="svc-card reveal">
-        <figure><img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=65" alt="Mechanic pouring fresh oil into an engine" loading="lazy" width="900" height="506"></figure>
+        <figure><img src="assets/svc-service.jpg" alt="Blue Nissan Skyline R32 GTS-t parked outside after workshop servicing" loading="lazy" width="1000" height="750"></figure>
         <div class="svc-body">
           <span class="svc-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Upkeep</span>
           <h3>Servicing, WoF &amp; LVV</h3>
@@ -358,10 +473,11 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
 <section class="lighter" id="about">
   <div class="wrap about-grid">
     <div class="about-photo reveal">
-      <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=1000&q=65" alt="Wall of spanners and tools inside the workshop" loading="lazy" width="1000" height="750">
+      <img src="assets/about.jpg" alt="Inline six engine bay with bronze cam covers and custom intake piping" loading="lazy" width="1200" height="900">
       <span class="corner">Since 2016</span>
     </div>
     <div class="about-copy reveal">
+      <span class="kicker" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">About the shop</span>
       <h2>Built around the cars we drive ourselves</h2>
       <p>Ethan Lowe opened Hi-Power Performance in Silverdale at the end of 2016 to work on the cars he grew up around: Skylines, GT-Rs and serious Japanese metal. The shop's own RB28-powered R34 GT-R makes 650kW and has been featured in NZ Performance Car.</p>
       <p>That car is the standard. If a part, tune or weld would not go on the shop R34, it does not go on your car either.</p>
@@ -374,12 +490,46 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
   </div>
 </section>
 
-<!-- CREW -->
-<section class="crew" id="crew">
+<!-- WORK -->
+<section class="work dark-sec" id="work">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>The crew</h2>
-      <p style="color:var(--txt-dim-dark)">A small team that knows these platforms inside out. Your car gets one set of hands, start to finish.</p>
+      <span class="kicker">Our work</span>
+      <h2>Straight off the workshop floor</h2>
+      <p>Engine builds, custom fabrication, wiring and finished cars. Tap any photo to see it full size.</p>
+    </div>
+    <div class="work-grid" id="work-grid">
+      <button class="work-item reveal" type="button" data-cap="R34 GT-R | Finished build"><img src="assets/work-01.jpg" alt="White Nissan Skyline R34 GT-R parked under a rural shed at golden hour" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="S15 Silvia | Race prep"><img src="assets/work-02.jpg" alt="Red Nissan Silvia S15 drifting in front of a crowd with tyre smoke pouring off the rear" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Twin turbo | Custom fabrication"><img src="assets/work-03.jpg" alt="Twin turbochargers and stainless pipework fabricated under the rear of a blue supercar" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Engine bay | Full rebuild"><img src="assets/work-04.jpg" alt="Yellow car with a candy purple engine bay, strut brace and polished intake" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Supercar | Stripped for build"><img src="assets/work-05.jpg" alt="Blue supercar stripped down on stands in the workshop yard" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Inline six | Engine build"><img src="assets/work-06.jpg" alt="Inline six engine with bronze cam covers and custom intake piping" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="RB26 | Tidy engine bay"><img src="assets/work-07.jpg" alt="RB26 engine sitting in the bay of a blue Skyline with a cold air intake fitted" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Braided lines | Plumbing &amp; wiring"><img src="assets/work-08.jpg" alt="Engine bay finished with red anodised fittings and braided lines" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Lancer Evo | Customer car"><img src="assets/work-09.jpg" alt="Black Mitsubishi Lancer Evolution photographed front on at sunset" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="V-twin | Custom exhaust"><img src="assets/work-10.jpg" alt="Red Harley-Davidson bagger with a custom stainless exhaust system" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Big single | Turbo install"><img src="assets/work-11.jpg" alt="Engine bay with a large single turbocharger and intercooler piping fitted" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Intake piping | In progress"><img src="assets/work-12.jpg" alt="Gold anodised intake piping and fittings during an engine bay build" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Dash setup | ECU tuning"><img src="assets/work-13.jpg" alt="Digital dash display mounted in a GT-R steering wheel showing live engine data" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Engine fitted | Bare shell build"><img src="assets/work-14.jpg" alt="Engine with individual throttle bodies fitted into a bare white engine bay" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="RX-7 FD | Customer car"><img src="assets/work-15.jpg" alt="Black Mazda RX-7 FD parked by the water at sunset" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Cylinder heads | On the bench"><img src="assets/work-16.jpg" alt="Machined alloy cylinder heads laid out on a workshop tool chest" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="R32 GTS-t | Out the door"><img src="assets/work-17.jpg" alt="Blue Nissan Skyline R32 GTS-t photographed from the rear three quarter" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Exhaust manifold | Fabrication"><img src="assets/work-18.jpg" alt="Engine bay with a fabricated tubular exhaust manifold and velocity stacks" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+      <button class="work-item reveal" type="button" data-cap="Bagger | Finished job"><img src="assets/work-19.jpg" alt="Red Harley-Davidson bagger side profile outside the workshop" loading="lazy"><span class="zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span></button>
+    </div>
+    <p class="work-note">A mix of customer cars and in-house builds. Cars, bikes and the occasional supercar all come through the same doors.</p>
+  </div>
+</section>
+
+<!-- CREW -->
+<section class="crew dark-sec" id="crew">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">The crew</span>
+      <h2>Who works on your car</h2>
+      <p>A small team that knows these platforms inside out. Your car gets one set of hands, start to finish.</p>
     </div>
     <div class="crew-grid">
       <article class="crew-card reveal">
@@ -409,6 +559,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
 <section class="light" id="reviews">
   <div class="wrap">
     <div class="sec-head reveal">
+      <span class="kicker">Reviews</span>
       <h2>What owners say</h2>
       <p>Example reviews written for this demo. The live site will pull Hi-Power's real Google reviews.</p>
     </div>
@@ -465,6 +616,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
 
 <!-- REVIEW BANNER -->
 <section class="banner">
+  <div class="banner-bg" aria-hidden="true"><img src="assets/work-02.jpg" alt="" loading="lazy"></div>
   <div class="wrap banner-in reveal">
     <div>
       <h2>Happy with our work? Leave us a review</h2>
@@ -532,7 +684,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="logo"><span class="tick" aria-hidden="true"></span>Hi-Power <span>&nbsp;Performance</span></div>
+        <a class="foot-logo" href="#top" aria-label="Hi-Power Performance home"><img src="assets/logo-light.png" alt="Hi-Power Performance" width="900" height="356"></a>
         <p>Specialist GT-R and JDM performance workshop in Silverdale, Auckland. Tuning, engine builds, fabrication and race prep since 2016.</p>
       </div>
       <div>
@@ -540,6 +692,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
         <ul>
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#work">Our Work</a></li>
           <li><a href="#crew">The Crew</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -571,44 +724,101 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
   </div>
 </footer>
 
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" type="button" aria-label="Close viewer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <button class="lb-prev" type="button" aria-label="Previous photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="lb-next" type="button" aria-label="Next photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <img alt="">
+  <div class="lb-cap"><b></b><span></span></div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AutoRepair",
+  "name":"Hi-Power Performance",
+  "description":"Specialist GT-R and JDM performance workshop in Silverdale, Auckland. ECU and dyno tuning, engine builds, custom fabrication, wiring harnesses, race prep and WoF servicing.",
+  "url":"https://hi-power-performance-demo.vercel.app/",
+  "image":"https://hi-power-performance-demo.vercel.app/assets/og.jpg",
+  "logo":"https://hi-power-performance-demo.vercel.app/assets/logo.png",
+  "telephone":"+64211190360",
+  "address":{"@type":"PostalAddress","streetAddress":"14f Flexman Place","addressLocality":"Silverdale","addressRegion":"Auckland","postalCode":"0932","addressCountry":"NZ"},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"17:00"}],
+  "sameAs":["https://www.facebook.com/hipowernz","https://www.instagram.com/hipowerperformance/","https://www.youtube.com/channel/UCg8PTsgTvGAm5bZ-A_XKxgg"]
+}
+</script>
+
 <script>
 (function(){
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* intro overlay */
+  /* ---- loading screen ---- */
   var intro = document.getElementById('intro');
-  if (reduced) { intro.remove(); }
-  else {
-    window.addEventListener('load', function(){
-      setTimeout(function(){ intro.classList.add('gone'); }, 1050);
-      setTimeout(function(){ intro.remove(); }, 1900);
-    });
-    setTimeout(function(){ if (document.getElementById('intro')) { intro.classList.add('gone'); setTimeout(function(){ intro.remove(); }, 800); } }, 2600);
+  if (intro) {
+    if (reduced) { intro.remove(); }
+    else {
+      var dismiss = function(){
+        if (!document.getElementById('intro')) return;
+        intro.classList.add('gone');
+        setTimeout(function(){ if (intro.parentNode) intro.remove(); }, 900);
+      };
+      window.addEventListener('load', function(){ setTimeout(dismiss, 1250); });
+      setTimeout(dismiss, 3200);
+    }
   }
 
-  /* mobile menu */
+  /* ---- scroll progress + sticky nav ---- */
+  var bar = document.getElementById('progress');
+  var head = document.querySelector('header');
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+    if (head) head.classList.toggle('stuck', y > 40);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+  }, {passive:true});
+  onScroll();
+
+  /* ---- mobile menu ---- */
   var burger = document.querySelector('.burger');
   var menu = document.querySelector('.mobile-menu');
-  burger.addEventListener('click', function(){
-    var open = menu.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  menu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
-  });
-
-  /* hero slide rotation */
-  var slides = document.querySelectorAll('.hero-slide');
-  var si = 0;
-  if (!reduced && slides.length > 1) {
-    setInterval(function(){
-      slides[si].classList.remove('on');
-      si = (si + 1) % slides.length;
-      slides[si].classList.add('on');
-    }, 6000);
+  if (burger && menu) {
+    burger.addEventListener('click', function(){
+      var open = menu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+    });
   }
 
-  /* hero review quote rotation (same data as the review cards) */
+  /* ---- hero slides ---- */
+  var slides = document.querySelectorAll('.hero-slide');
+  var dots = document.querySelectorAll('.hero-dots button');
+  var si = 0, heroTimer = null;
+  function show(n){
+    if (!slides.length) return;
+    slides[si].classList.remove('on');
+    if (dots[si]) dots[si].setAttribute('aria-current','false');
+    si = (n + slides.length) % slides.length;
+    slides[si].classList.add('on');
+    if (dots[si]) dots[si].setAttribute('aria-current','true');
+  }
+  function startHero(){
+    if (reduced || slides.length < 2) return;
+    clearInterval(heroTimer);
+    heroTimer = setInterval(function(){ show(si + 1); }, 6500);
+  }
+  dots.forEach(function(d, i){
+    d.addEventListener('click', function(){ show(i); startHero(); });
+  });
+  startHero();
+
+  /* ---- hero review quote rotation ---- */
   var quotes = [
     { q: '"Dyno sheet in hand before I left. The car pulls harder everywhere and idles like stock."', c: 'Josh M, Millwater' },
     { q: '"Ethan rewired my whole engine bay for the Haltech. The loom looks factory."', c: 'Sam K, Whangaparaoa' },
@@ -617,7 +827,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
   var qEl = document.getElementById('hero-quote');
   var cEl = document.getElementById('hero-cite');
   var qi = 0;
-  if (!reduced && qEl) {
+  if (!reduced && qEl && cEl) {
     setInterval(function(){
       qEl.classList.add('fade');
       setTimeout(function(){
@@ -626,10 +836,10 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
         cEl.textContent = quotes[qi].c;
         qEl.classList.remove('fade');
       }, 500);
-    }, 6000);
+    }, 6500);
   }
 
-  /* scroll reveals */
+  /* ---- scroll reveals ---- */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -637,7 +847,58 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:56px 0 34p
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  /* gmail compose links built from split parts */
+  /* ---- lightbox ---- */
+  var items = Array.prototype.slice.call(document.querySelectorAll('.work-item'));
+  var lb = document.getElementById('lightbox');
+  if (lb && items.length) {
+    var lbImg = lb.querySelector('img');
+    var lbTitle = lb.querySelector('.lb-cap b');
+    var lbText = lb.querySelector('.lb-cap span');
+    var idx = 0, lastFocus = null;
+
+    function render(){
+      var it = items[idx];
+      var img = it.querySelector('img');
+      lbImg.src = img.getAttribute('src');
+      lbImg.alt = img.getAttribute('alt') || '';
+      lbTitle.textContent = it.getAttribute('data-cap') || '';
+      lbText.textContent = (idx + 1) + ' of ' + items.length;
+    }
+    function open(i){
+      idx = i; lastFocus = document.activeElement;
+      render();
+      lb.classList.add('open');
+      document.body.classList.add('locked');
+      lb.querySelector('.lb-close').focus();
+    }
+    function close(){
+      lb.classList.remove('open');
+      document.body.classList.remove('locked');
+      lbImg.removeAttribute('src');
+      if (lastFocus) lastFocus.focus();
+    }
+    function step(d){ idx = (idx + d + items.length) % items.length; render(); }
+
+    items.forEach(function(it, i){ it.addEventListener('click', function(){ open(i); }); });
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-prev').addEventListener('click', function(){ step(-1); });
+    lb.querySelector('.lb-next').addEventListener('click', function(){ step(1); });
+    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+    document.addEventListener('keydown', function(e){
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'ArrowRight') step(1);
+      else if (e.key === 'Tab') {
+        var f = lb.querySelectorAll('button');
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
+  /* ---- gmail compose links built from split parts ---- */
   document.querySelectorAll('a[data-gmail]').forEach(function(a){
     var to = a.getAttribute('data-user') + '@' + a.getAttribute('data-domain');
     a.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) + '&su=' + (a.getAttribute('data-su') || '') + '&body=' + (a.getAttribute('data-body') || '');
