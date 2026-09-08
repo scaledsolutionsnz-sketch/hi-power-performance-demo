@@ -273,7 +273,11 @@ section{padding:100px 0}
 .rating-score{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:2rem;font-weight:700;line-height:1;color:var(--txt-on-light);font-variant-numeric:tabular-nums}
 .rating-score .stars{display:flex;gap:2px;color:var(--accent)}
 .rating-body>span{display:block;margin-top:7px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;font-family:var(--display);color:var(--txt-dim-light)}
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:start}
+/* Every card the same height, both rows. Letting them size to their own
+   content left the row ragged, which reads as broken rather than airy. The
+   reviewer block is pinned to the bottom with margin-top:auto, so the extra
+   space under a short quote sits as deliberate white space. */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;grid-auto-rows:1fr}
 .rev-card{background:#fff;border:1px solid var(--line-dark);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:12px}
 .rev-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .src-mark{flex:none}
